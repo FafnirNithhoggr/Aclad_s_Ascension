@@ -7,7 +7,7 @@ public class AcladLogic : MonoBehaviour
     public Rigidbody rb;
     public float speed;
 
-    private Vector3 direction = Vector3.forward;
+    public Vector3 direction = Vector3.forward;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,14 +22,15 @@ public class AcladLogic : MonoBehaviour
 
 
     private void OnTriggerEnter(Collider other) {
-        Debug.Log("Triggered");
+
         if (other.gameObject.tag == "Slope") {
             rb.useGravity = false;
         }
+
     }
 
+
     private void OnTriggerExit(Collider other) {
-        Debug.Log("Exited");
         if (other.gameObject.tag == "Slope") {
             rb.useGravity = true;
         }
