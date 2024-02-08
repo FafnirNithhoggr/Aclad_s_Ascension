@@ -5,7 +5,7 @@ using UnityEngine;
 public class AcladLogic : MonoBehaviour
 {
 
-    public float speed = 0.25f;
+    public float speed;
 
     private Vector3 direction = Vector3.forward;
     // Start is called before the first frame update
@@ -19,4 +19,5 @@ public class AcladLogic : MonoBehaviour
     {
         transform.position += direction * speed * Time.deltaTime;
     }
+
 }
