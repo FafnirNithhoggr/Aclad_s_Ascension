@@ -21,14 +21,11 @@ public class AcladLogic : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other) {
-
+    private void OnTriggerStay(Collider other) {
         if (other.gameObject.tag == "Slope") {
             rb.useGravity = false;
         }
-
     }
-
 
     private void OnTriggerExit(Collider other) {
         if (other.gameObject.tag == "Slope") {
@@ -39,4 +36,6 @@ public class AcladLogic : MonoBehaviour
     public void SetDirection(Vector3 newDirection) {
         direction = newDirection;
     }
+
+
 }
