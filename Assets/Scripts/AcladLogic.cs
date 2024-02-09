@@ -7,11 +7,11 @@ public class AcladLogic : MonoBehaviour
     public Rigidbody rb;
     public float speed;
 
-    public Vector3 direction = Vector3.forward;
+    private Vector3 direction;
     // Start is called before the first frame update
     void Start()
     {
-        
+        direction = transform.forward;
     }
 
     // Update is called once per frame
@@ -34,5 +34,9 @@ public class AcladLogic : MonoBehaviour
         if (other.gameObject.tag == "Slope") {
             rb.useGravity = true;
         }
+    }
+
+    public void SetDirection(Vector3 newDirection) {
+        direction = newDirection;
     }
 }

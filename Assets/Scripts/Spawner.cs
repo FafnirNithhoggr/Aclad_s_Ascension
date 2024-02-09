@@ -38,7 +38,8 @@ public class Spawner : MonoBehaviour
 
     void SpawnAclad()
     {
-        GameObject aclad = Instantiate(acladPrefab, transform.position, Quaternion.identity);
+        GameObject aclad = Instantiate(acladPrefab, transform.position, transform.rotation);
+        //aclad.GetComponent<AcladLogic>().SetDirection(transform.forward);
     }
 
 }
