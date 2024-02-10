@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 90568368830222093}
   - component: {fileID: 3047986694018472038}
   - component: {fileID: 6792417164406850766}
-  - component: {fileID: 1550124110174011964}
+  - component: {fileID: 7644410911234094452}
   m_Layer: 0
   m_Name: Aclad Left
   m_TagString: Untagged
@@ -136,7 +136,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 94
   m_CollisionDetection: 0
---- !u!114 &1550124110174011964
+--- !u!114 &7644410911234094452
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,6 +145,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5449948114487523844}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dedb9a73cf5ea7643adc1b09fc422c58, type: 3}
+  m_Script: {fileID: 11500000, guid: de3bb16dd06b4d348a993ee5eb8f49b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLeft: 1
