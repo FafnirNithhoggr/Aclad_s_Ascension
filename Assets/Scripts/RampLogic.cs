@@ -16,23 +16,18 @@ public class RampLogic : MonoBehaviour
 
     }
 
+    private void OnTriggerStay(Collider other) {
+        if (other.gameObject.CompareTag("Aclad")) {
+            Vector3 direction = other.gameObject.GetComponent<AcladLogic>().GetDirection();
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.tag == "Aclad")
-        {
-            Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
-            rb.AddForce(Vector3.down * 0.2f, ForceMode.Acceleration);
-            rb.useGravity = false;
+            // Check if the Aclad is moving up the ramp and if so, apply a force to help it move up
+            if (Vector3.Dot(direction, transform.forward) < 0) {
+                Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
+                Vector3 force = ((transform.forward*-1) + transform.up) * 3;
+                rb.AddForce(force, ForceMode.Acceleration);
+            }
         }
+        
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "Aclad")
-        {
-            Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
-            rb.useGravity = true;
-        }
-    }
 }
