@@ -28,5 +28,13 @@ public class AcladLogic : MonoBehaviour
         return direction;
     }
 
+    private void OnCollisionEnter(Collision other) {
+        if (other.gameObject.CompareTag("Aclad")) {
+            // Invert the direction of the Aclad
+            SetDirection(direction * -1);
+            // Rotate the Aclad 180 degrees
+            gameObject.transform.Rotate(0, 180, 0);
+        }
+    }
 
 }
