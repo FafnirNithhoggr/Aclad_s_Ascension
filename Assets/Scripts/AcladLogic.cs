@@ -20,19 +20,6 @@ public class AcladLogic : MonoBehaviour
         transform.position += direction * speed * Time.deltaTime;
     }
 
-
-    private void OnTriggerStay(Collider other) {
-        if (other.gameObject.tag == "Slope") {
-            rb.useGravity = false;
-        }
-    }
-
-    private void OnTriggerExit(Collider other) {
-        if (other.gameObject.tag == "Slope") {
-            rb.useGravity = true;
-        }
-    }
-
     public void SetDirection(Vector3 newDirection) {
         direction = newDirection;
     }

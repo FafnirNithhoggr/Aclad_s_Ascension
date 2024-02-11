@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3617033342124976011}
   - component: {fileID: 2265307575008605892}
   - component: {fileID: 5060326461359293046}
+  - component: {fileID: 262276836507345124}
   m_Layer: 0
   m_Name: blockSlope
   m_TagString: Slope
@@ -129,6 +130,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.75, y: 0.7827891, z: 0.8534285}
   m_Center: {x: 0.014003396, y: 0.58149785, z: 0.053393424}
+--- !u!114 &262276836507345124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896572930321432963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c17362f563d8ee048a28532782094220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4445415668599078471
 GameObject:
   m_ObjectHideFlags: 0
