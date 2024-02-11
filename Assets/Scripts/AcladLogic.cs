@@ -24,5 +24,9 @@ public class AcladLogic : MonoBehaviour
         direction = newDirection;
     }
 
+    public Vector3 GetDirection() {
+        return direction;
+    }
+
 
 }
