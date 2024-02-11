@@ -16,11 +16,13 @@ public class RampLogic : MonoBehaviour
 
     }
 
+
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Aclad")
         {
             Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
+            rb.AddForce(Vector3.down * 0.2f, ForceMode.Acceleration);
             rb.useGravity = false;
         }
     }
