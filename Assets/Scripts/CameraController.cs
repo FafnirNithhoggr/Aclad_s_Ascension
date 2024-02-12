@@ -48,8 +48,6 @@ public class CameraController : MonoBehaviour
             }
         }
 
-        
-
         // If it's esc, then exit the third person view
         if (Input.GetKey(KeyCode.Escape)) {
             EndCameraThirdPerson();
@@ -91,13 +89,10 @@ public class CameraController : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * transitionSpeed);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * transitionSpeed);
         } else if (cameraState == CameraState.TransitionToFirst) {
-            Debug.Log("Transitioning to first");
             // Smooth the transition back to the original position
             transform.position = Vector3.Lerp(transform.position, originalPosition, Time.deltaTime * transitionSpeed);
             transform.rotation = Quaternion.Lerp(transform.rotation, originalRotation, Time.deltaTime * transitionSpeed);
 
-            Debug.Log("Original position: " + originalPosition);
-            Debug.Log("Current position: " + transform.position);
             // Check if the transition is complete
             if (Vector3.Distance(transform.position, originalPosition) < 0.1f && Quaternion.Angle(transform.rotation, originalRotation) < 1.0f) {
                 cameraState = CameraState.Main;
@@ -106,18 +101,18 @@ public class CameraController : MonoBehaviour
     }
 
     void StartCameraThirdPerson()
-    {
+    {   
+        // If the camera is already in third person, then it shouldn't overwrite the original position
+        if (cameraState == CameraState.ThirdPerson) {return;}
         // Save the original
         originalPosition = transform.position;
         originalRotation = transform.rotation;
         originalFocusPoint = focusPoint;
         cameraState = CameraState.ThirdPerson;
-        Debug.Log("Original position in Start: " + originalPosition);
     }
 
     void EndCameraThirdPerson()
     {
-        Debug.Log("Original position in End: " + originalPosition);
         cameraState = CameraState.TransitionToFirst;
         focusPoint = originalFocusPoint;
     }
