@@ -82,6 +82,11 @@ public class CameraController : MonoBehaviour
         // Check if the camera is currently in third person
 
         if (cameraState == CameraState.ThirdPerson) {
+            // Check if the target Aclad has not been destroyed
+            if (targetAclad == null) {
+                EndCameraThirdPerson();
+                return;
+            }
             Vector3 desiredPosition = targetAclad.position - (targetAclad.forward*2) + Vector3.up; // Adjust as needed
             Quaternion targetRotation = Quaternion.LookRotation(targetAclad.position - transform.position);
 
