@@ -53,11 +53,11 @@ public class CameraController : MonoBehaviour
             EndCameraThirdPerson();
         }
 
+        if (cameraState != CameraState.Main) {return;}
+
         // Zoom in and out with the mouse wheel
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         transform.Translate(0, 0, scroll * 10);
-
-        if (cameraState != CameraState.Main) {return;}
 
         if (Input.GetKey(KeyCode.A)) {
             transform.RotateAround(focusPoint, Vector3.up, rotationSpeed * Time.deltaTime);

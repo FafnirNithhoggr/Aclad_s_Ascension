@@ -5904,7 +5904,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bffde312a57e48c42b0c28ee583b95e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 40
+  rotationSpeed: 100
+  focusPoint: {x: 0, y: 0, z: 0}
+  lowerBound: -3
+  upperBound: 20
+  transitionSpeed: 5
 --- !u!4 &965841254 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8076722941370567246, guid: 27455f6eda7089943a5c74cd865760c4, type: 3}
