@@ -8,6 +8,6 @@ public class MenuLogic : MonoBehaviour
     public void ClickPlay()
     {
         // Load the game scene
-        SceneManager.LoadScene("DevelopmentLevel");
+        SceneManager.LoadScene("LevelSelection");
     }
 }
