@@ -12,7 +12,8 @@ public class Fan : MonoBehaviour
 
         if (other.gameObject.CompareTag("Aclad")) {
             Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * windForce, ForceMode.Impulse);
+            //rb.AddForce(transform.forward * windForce, ForceMode.Impulse);
+            rb.AddForce(transform.forward * windForce, ForceMode.VelocityChange);
         }
     }
 }
