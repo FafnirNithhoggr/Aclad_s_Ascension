@@ -21,6 +21,8 @@ public class CameraController : MonoBehaviour
 
     private CameraState cameraState;
 
+    private Vector3 XZPlane = new Vector3(1.0f, 0.0f, 1.0f);
+
     void Start()
     {
         // Save the original position and rotation and make sure it is a copy
@@ -31,7 +33,7 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        // Check if any aclad was selected using the mouse
+/*         // Check if any aclad was selected using the mouse
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -46,7 +48,7 @@ public class CameraController : MonoBehaviour
                     StartCameraThirdPerson();
                 }
             }
-        }
+        } */
 
         // If it's esc, then exit the third person view
         if (Input.GetKey(KeyCode.Escape)) {
@@ -76,6 +78,7 @@ public class CameraController : MonoBehaviour
             transform.Translate(0, -0.1f, 0);
             focusPoint.y -= 0.1f;
         }
+
     }
 
     private void LateUpdate() {
