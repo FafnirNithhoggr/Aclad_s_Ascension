@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class SelectionManager : MonoBehaviour
@@ -8,6 +9,9 @@ public class SelectionManager : MonoBehaviour
     public GameObject mainCamera;
 
     private Transform targetAclad; // The currently selected Aclad
+
+    
+    public static event Action<GameObject> OnAcladSelected;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +31,7 @@ public class SelectionManager : MonoBehaviour
             {
                 if (hit.collider.gameObject.CompareTag("Aclad"))
                 {
-                    SelectAclad(hit.collider.gameObject.transform);
+                    SelectAclad(hit.collider.gameObject);
                 }
             }
         }
@@ -42,10 +46,13 @@ public class SelectionManager : MonoBehaviour
 
     }
 
-    void SelectAclad(Transform targetAclad) {
+    void SelectAclad(GameObject aclad) {
         reticle.SetActive(true);
-        this.targetAclad = targetAclad;
+        this.targetAclad = aclad.transform;
+
+        OnAcladSelected?.Invoke(aclad);
 
     }
+
 
 }
