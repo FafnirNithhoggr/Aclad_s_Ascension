@@ -3793,7 +3793,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6405756191009318818, guid: cd072c93ff5b9554d8cc6747eb430624, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.08
+      value: -5.453
       objectReference: {fileID: 0}
     - target: {fileID: 6405756191009318818, guid: cd072c93ff5b9554d8cc6747eb430624, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6139,6 +6139,10 @@ PrefabInstance:
     - target: {fileID: 4246010750974407425, guid: 8f11a42fc27a15b418edfce893e80d99, type: 3}
       propertyPath: m_Name
       value: Aclad Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 4246010750974407425, guid: 8f11a42fc27a15b418edfce893e80d99, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5270560051588827467, guid: 8f11a42fc27a15b418edfce893e80d99, type: 3}
       propertyPath: spawnAmount
@@ -13127,6 +13131,79 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8076722941370567246, guid: 27455f6eda7089943a5c74cd865760c4, type: 3}
   m_PrefabInstance: {fileID: 165876117}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2123510832
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2413693898265326065, guid: 261be953539922d44820ac5f67584e4c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.281
+      objectReference: {fileID: 0}
+    - target: {fileID: 2413693898265326065, guid: 261be953539922d44820ac5f67584e4c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.306
+      objectReference: {fileID: 0}
+    - target: {fileID: 2413693898265326065, guid: 261be953539922d44820ac5f67584e4c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.447
+      objectReference: {fileID: 0}
+    - target: {fileID: 2413693898265326065, guid: 261be953539922d44820ac5f67584e4c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2413693898265326065, guid: 261be953539922d44820ac5f67584e4c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2413693898265326065, guid: 261be953539922d44820ac5f67584e4c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 2413693898265326065, guid: 261be953539922d44820ac5f67584e4c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2413693898265326065, guid: 261be953539922d44820ac5f67584e4c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2413693898265326065, guid: 261be953539922d44820ac5f67584e4c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2413693898265326065, guid: 261be953539922d44820ac5f67584e4c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4429786649651467488, guid: 261be953539922d44820ac5f67584e4c, type: 3}
+      propertyPath: maxDamp
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4429786649651467488, guid: 261be953539922d44820ac5f67584e4c, type: 3}
+      propertyPath: dampSenstivity
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 4429786649651467488, guid: 261be953539922d44820ac5f67584e4c, type: 3}
+      propertyPath: maxSuspensionLength
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4429786649651467488, guid: 261be953539922d44820ac5f67584e4c, type: 3}
+      propertyPath: suspensionMultiplier
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7101055994744142403, guid: 261be953539922d44820ac5f67584e4c, type: 3}
+      propertyPath: m_Name
+      value: Aclad
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 261be953539922d44820ac5f67584e4c, type: 3}
 --- !u!4 &2125563455 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8076722941370567246, guid: 27455f6eda7089943a5c74cd865760c4, type: 3}
@@ -13283,3 +13360,4 @@ SceneRoots:
   - {fileID: 119882017}
   - {fileID: 941158657}
   - {fileID: 1775958032}
+  - {fileID: 2123510832}

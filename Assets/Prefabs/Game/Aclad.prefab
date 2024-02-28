@@ -55,9 +55,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.64
-  m_Height: 2.3
+  m_Height: 0
   m_Direction: 1
-  m_Center: {x: 0, y: -0.16, z: -0.09}
+  m_Center: {x: 0, y: 0.35, z: -0.09}
 --- !u!54 &8979835717107177485
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -99,6 +99,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 8979835717107177485}
   speed: 1
+  maxSuspensionLength: 0.5
+  suspensionMultiplier: 10
+  dampSenstivity: 400
+  maxDamp: 6
 --- !u!1001 &8309862427316616135
 PrefabInstance:
   m_ObjectHideFlags: 0
