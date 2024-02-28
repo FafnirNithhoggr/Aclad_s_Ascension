@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.U)) {
+        if (Input.GetKey(KeyCode.U) && selectedAclad != null) {
             //create an instance of the acladUp prefab on the same position as the selectedAclad
             Instantiate(acladUp, selectedAclad.transform.position, Quaternion.identity);
             //destroy the selectedAclad
@@ -30,16 +30,22 @@ public class UIManager : MonoBehaviour
     private void OnEnable()
     {
         SelectionManager.OnAcladSelected += HandleAcladSelected;
+        SelectionManager.OnAcladDeselected += HandleAcladDeselected;
     }
 
     private void OnDisable()
     {
         SelectionManager.OnAcladSelected -= HandleAcladSelected;
+        SelectionManager.OnAcladDeselected -= HandleAcladDeselected;
     }
 
     void HandleAcladSelected(GameObject selectedAclad)
     {
-        // Update UI based on the selected NPC
-        // For example, display available operations or information about the NPC
+        this.selectedAclad = selectedAclad;
+    }
+
+    void HandleAcladDeselected()
+    {
+        this.selectedAclad = null;
     }
 }

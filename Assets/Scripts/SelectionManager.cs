@@ -12,6 +12,7 @@ public class SelectionManager : MonoBehaviour
 
     
     public static event Action<GameObject> OnAcladSelected;
+    public static event Action OnAcladDeselected;
 
     // Start is called before the first frame update
     void Start()
@@ -31,27 +32,41 @@ public class SelectionManager : MonoBehaviour
             {
                 if (hit.collider.gameObject.CompareTag("Aclad"))
                 {
-                    SelectAclad(hit.collider.gameObject);
+                    HandleAcladSelected(hit.collider.gameObject);
                 }
             }
         }
 
         if(reticle.activeSelf && targetAclad != null) {
-            Debug.Log(targetAclad.position);
             reticle.transform.position = targetAclad.position;
             //make the object face the camera at all times using its y axis
         
             reticle.transform.LookAt(mainCamera.transform);
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape) || (targetAclad == null && reticle.activeSelf)) {
+            HandleAcladDeselected();
+        }
+
+
+
+
+
     }
 
-    void SelectAclad(GameObject aclad) {
+    void HandleAcladSelected(GameObject aclad) {
         reticle.SetActive(true);
         this.targetAclad = aclad.transform;
 
         OnAcladSelected?.Invoke(aclad);
 
+    }
+
+    void HandleAcladDeselected() {
+        reticle.SetActive(false);
+        this.targetAclad = null;
+
+        OnAcladDeselected?.Invoke();
     }
 
 
