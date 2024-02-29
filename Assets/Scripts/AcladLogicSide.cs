@@ -5,20 +5,27 @@ using UnityEngine;
 public class AcladLogicSide : MonoBehaviour
 {
 
-    public bool isLeft = false;
+    public bool isRight;
 
     private void OnTriggerEnter(Collider other) {
 
         if (other.gameObject.CompareTag("Aclad")) {
             
             Transform otherTransform = other.gameObject.GetComponent<Transform>();
-            if (isLeft){
-                otherTransform.Rotate(0, -90, 0);
+
+            if(isRight){
+                otherTransform.LookAt(otherTransform.position + (-transform.right)); //-tranform.right is actually the right direction
             }else{
-                otherTransform.Rotate(0, 90, 0);
+                otherTransform.LookAt(otherTransform.position + transform.right);
             }
+
             AcladLogic acladLogic = other.gameObject.GetComponent<AcladLogic>();
-            acladLogic.SetDirection(otherTransform.forward);
+            
+            if(isRight){
+                acladLogic.SetDirection(-transform.right);
+            }else{
+                acladLogic.SetDirection(transform.right);
+            }
         }
     }
 }

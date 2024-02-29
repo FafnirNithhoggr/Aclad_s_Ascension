@@ -16,7 +16,7 @@ public class RampLogic : MonoBehaviour
 
     }
 
-    private void OnTriggerStay(Collider other) {
+    /*private void OnTriggerStay(Collider other) {
         if (other.gameObject.CompareTag("Aclad")) {
             Vector3 direction = other.gameObject.GetComponent<AcladLogic>().GetDirection();
 
@@ -28,6 +28,6 @@ public class RampLogic : MonoBehaviour
             }
         }
         
-    }
+    }*/
 
 }

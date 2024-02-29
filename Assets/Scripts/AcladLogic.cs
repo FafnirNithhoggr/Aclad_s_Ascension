@@ -50,6 +50,8 @@ public class AcladLogic : MonoBehaviour
 
                 Vector3 forwardMovement = speed * direction * Mathf.Clamp01(Vector3.Dot(hit.normal, Vector3.up));
                 transform.position += direction * speed * Mathf.Clamp01(Vector3.Dot(hit.normal, Vector3.up)/2) * Time.deltaTime;
+
+                Debug.DrawRay(transform.position, rb.velocity, Color.green);
         
             
             }
@@ -77,6 +79,7 @@ public class AcladLogic : MonoBehaviour
 
     private void OnCollisionEnter(Collision other) {
         if (other.gameObject.CompareTag("Aclad")) {
+            Debug.DrawRay(transform.position, other.GetContact(0).normal, Color.red);
             // Invert the direction of the Aclad
             SetDirection(direction * -1);
             // Rotate the Aclad 180 degrees

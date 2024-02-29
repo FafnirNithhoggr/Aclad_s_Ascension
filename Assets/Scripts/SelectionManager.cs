@@ -38,7 +38,7 @@ public class SelectionManager : MonoBehaviour
         }
 
         if(reticle.activeSelf && targetAclad != null) {
-            reticle.transform.position = targetAclad.position;
+            reticle.transform.position = targetAclad.position + new Vector3(0, 0.08f, 0);
             //make the object face the camera at all times using its y axis
         
             reticle.transform.LookAt(mainCamera.transform);
