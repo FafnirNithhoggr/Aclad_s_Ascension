@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 8979835717107177485}
-  speed: 1
+  speed: 1.25
   maxSuspensionLength: 0.5
   suspensionMultiplier: 10
   dampSenstivity: 400

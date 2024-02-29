@@ -32,7 +32,6 @@ public class AcladLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += direction * speed * Time.deltaTime;
 
         RaycastHit hit;
         if(Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity)){
@@ -48,14 +47,23 @@ public class AcladLogic : MonoBehaviour
 
                 Debug.DrawRay(transform.position, Vector3.down * maxSuspensionLength, Color.red);
                 Debug.DrawRay(transform.position, suspensionForce, Color.green);
-                
-                //rb.AddForceAtPosition((Mathf.Clamp(maxSuspensionLength - hit.distance, 0, maxSuspensionLength) * suspensionMultiplier * transform.up + transform.up * Mathf.Clamp((oldDist- hit.distance) * dampSenstivity, 0, maxDamp)) * Time.deltaTime, transform.position);
+
+                Vector3 forwardMovement = speed * direction * Mathf.Clamp01(Vector3.Dot(hit.normal, Vector3.up));
+                transform.position += direction * speed * Mathf.Clamp01(Vector3.Dot(hit.normal, Vector3.up)/2) * Time.deltaTime;
+        
+            
             }
             else
             {
-
+                transform.position += direction * speed * Time.deltaTime;
             }
             oldDist = hit.distance;
+        
+        }
+
+        if (transform.position.y < -10)
+        {
+            Destroy(gameObject);
         }
     }
 
