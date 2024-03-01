@@ -52,6 +52,8 @@ public class AcladLogic : MonoBehaviour
                 transform.position += direction * speed * Mathf.Clamp01(Vector3.Dot(hit.normal, Vector3.up)/2) * Time.deltaTime;
 
                 Debug.DrawRay(transform.position, rb.velocity, Color.green);
+
+                
         
             
             }
