@@ -9,6 +9,9 @@ public class CameraController : MonoBehaviour
     public float lowerBound;
     public float upperBound;
     public float transitionSpeed = 5f; // Adjust the transition speed as needed
+    public Vector3 winningPosition;
+    public float winningTransitionSpeed = 5.0f; // Adjust the transition speed as needed
+    public float winningRotationSpeed = 2.0f; // Adjust the rotation speed as needed
     private Vector3 originalPosition ;
     private Quaternion originalRotation;
     private Vector3 originalFocusPoint;
@@ -16,7 +19,9 @@ public class CameraController : MonoBehaviour
     private enum CameraState {
         Main,
         ThirdPerson,
-        TransitionToFirst
+        TransitionToFirst,
+        GameWonTransition,
+        GameWon
     }
 
     private CameraState cameraState;
@@ -33,6 +38,23 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
+        if (cameraState == CameraState.GameWon) {
+            return;
+        }
+
+        if (cameraState == CameraState.GameWonTransition) {
+            // Smooth the transition to the winning position and make the camera look up
+            transform.position = Vector3.Lerp(transform.position, winningPosition, Time.deltaTime * winningTransitionSpeed);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(Vector3.up), Time.deltaTime * winningRotationSpeed);
+            // Check if the transition is complete
+            if (Vector3.Distance(transform.position, winningPosition) < 0.1f && Quaternion.Angle(transform.rotation, Quaternion.LookRotation(Vector3.up)) < 1.0f) {
+                cameraState = CameraState.GameWon;
+                // Show the winning text mesh pro
+                GameObject.Find("WinCanvas").GetComponent<Canvas>().enabled = true;
+            }
+            
+        }
+
 /*         // Check if any aclad was selected using the mouse
         if (Input.GetMouseButtonDown(0))
         {
@@ -123,6 +145,10 @@ public class CameraController : MonoBehaviour
     {
         cameraState = CameraState.TransitionToFirst;
         focusPoint = originalFocusPoint;
+    }
+
+    public void WonGame() {
+        cameraState = CameraState.GameWonTransition;
     }
 
 }
