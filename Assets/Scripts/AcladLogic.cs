@@ -37,7 +37,6 @@ public class AcladLogic : MonoBehaviour
         if(Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity)){
             if(hit.collider != null)
             {
-                
 
                 Vector3 suspensionForce = Mathf.Clamp(maxSuspensionLength - hit.distance, 0, maxSuspensionLength) * suspensionMultiplier * transform.up;
 
@@ -59,11 +58,13 @@ public class AcladLogic : MonoBehaviour
             }
             else
             {
-                transform.position += direction * speed * Time.deltaTime;
             }
             oldDist = hit.distance;
         
+        }else{
+            transform.position += direction * speed * Time.deltaTime;
         }
+
 
         if (transform.position.y < -10)
         {

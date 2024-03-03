@@ -23,21 +23,21 @@ public class UIManager : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.U) && selectedAclad != null) {
             //create an instance of the acladUp prefab on the same position as the selectedAclad
-            Instantiate(acladUp, selectedAclad.transform.position, Quaternion.identity);
+            Instantiate(acladUp, selectedAclad.transform.position, selectedAclad.transform.rotation * Quaternion.Euler(0f, 180f, 0f));
             //destroy the selectedAclad
             Destroy(selectedAclad);
         }
 
         if (Input.GetKey(KeyCode.R) && selectedAclad != null) {
             //create an instance of the acladRight prefab on the same position as the selectedAclad
-            Instantiate(acladRight, selectedAclad.transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+            Instantiate(acladRight, selectedAclad.transform.position + new Vector3(0, 0.5f, 0), selectedAclad.transform.rotation * Quaternion.Euler(0f, 180f, 0f));
             //destroy the selectedAclad
             Destroy(selectedAclad);
         }
 
         if (Input.GetKey(KeyCode.L) && selectedAclad != null) {
             //create an instance of the acladLeft prefab on the same position as the selectedAclad
-            Instantiate(acladLeft, selectedAclad.transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+            Instantiate(acladLeft, selectedAclad.transform.position + new Vector3(0, 0.5f, 0), selectedAclad.transform.rotation * Quaternion.Euler(0f, 180f, 0f));
             //destroy the selectedAclad
             Destroy(selectedAclad);
         }
