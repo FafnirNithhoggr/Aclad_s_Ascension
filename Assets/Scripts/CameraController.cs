@@ -45,7 +45,7 @@ public class CameraController : MonoBehaviour
         mainCameraPosition = transform.position;
         mainCameraRotation = transform.rotation;
         cameraState = CameraState.Begin;
-        transform.position = Spawner.transform.position + new Vector3(-0.5f, 1, 0);
+        transform.position = Spawner.transform.position + new Vector3(-0.1f, 0.9f, 0.6f);
         transform.rotation = Spawner.transform.rotation;
     }
 
