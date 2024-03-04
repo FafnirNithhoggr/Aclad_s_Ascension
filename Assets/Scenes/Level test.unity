@@ -1112,7 +1112,7 @@ MonoBehaviour:
   moveSpeed: 6
   transitionMoveSpeed: 0.05
   transitionRotationSpeed: 0.05
-  mouseRotationSpeed: 50
+  mouseRotationSpeed: 60
   lowerBound: -3
   upperBound: 20
   timeToWait: 0.5
