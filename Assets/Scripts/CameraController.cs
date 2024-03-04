@@ -8,6 +8,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private float transitionMoveSpeed;
     [SerializeField] private float transitionRotationSpeed;
+    [SerializeField] private float mouseRotationSpeed;
     [SerializeField] private float lowerBound;
     [SerializeField] private float upperBound;
     [SerializeField] private float timeToWait;
@@ -69,10 +70,6 @@ public class CameraController : MonoBehaviour
 
     }
 
-    private void LateUpdate() {
-        
-    }
-
     private void HandleBegin() {
         // Just wait for a few seconds before starting the initial transition
         if (Time.time > timeToWait) {
@@ -111,6 +108,20 @@ public class CameraController : MonoBehaviour
             }
         }
 
+        // The camera should rotate on the global y axis when the mouse is at the edge of the screen
+        if (Input.mousePosition.x <= 0) {
+            transform.Rotate(Vector3.up, -mouseRotationSpeed * Time.deltaTime, Space.World);
+        } else if (Input.mousePosition.x >= Screen.width - 1) {
+            transform.Rotate(Vector3.up, mouseRotationSpeed * Time.deltaTime, Space.World);
+        }
+
+        // The camera should rotate on the local x axis when the mouse is at the edge of the screen
+        // if (Input.mousePosition.y <= 0) {
+        //     transform.Rotate(transform.right, mouseRotationSpeed * Time.deltaTime, Space.World);
+        // } else if (Input.mousePosition.y >= Screen.height - 1) {
+        //     transform.Rotate(transform.right, -mouseRotationSpeed * Time.deltaTime, Space.World);
+        // }
+
         if (Input.GetKeyDown(KeyCode.V) && targetAclad != null) {
             cameraState = CameraState.MainToThird;
             mainCameraRotation = transform.rotation;
@@ -120,6 +131,11 @@ public class CameraController : MonoBehaviour
     }
 
     private void HandleMainToThird() {
+        if (targetAclad == null) {
+            cameraState = CameraState.Main;
+            elapsedTime = 0.0f;
+            return;
+        }
         elapsedTime += Time.deltaTime;
         float factor = Mathf.SmoothStep(0, 1, elapsedTime / 2.0f);
         Vector3 targetPosition = targetAclad.position - targetAclad.forward * 2.0f + Vector3.up * 1.0f;
@@ -136,6 +152,7 @@ public class CameraController : MonoBehaviour
     private void HandleThirdPerson() {
         if (Input.GetKeyDown(KeyCode.V) || targetAclad == null) {
             cameraState = CameraState.ThirdToMain;
+            elapsedTime = 0.0f;
             return;
         }
 
