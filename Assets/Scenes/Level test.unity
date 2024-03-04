@@ -1110,8 +1110,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 100
   moveSpeed: 6
-  transitionMoveSpeed: 0.1
-  transitionRotationSpeed: 0.1
+  transitionMoveSpeed: 0.05
+  transitionRotationSpeed: 0.05
+  mouseRotationSpeed: 50
   lowerBound: -3
   upperBound: 20
   timeToWait: 0.5
