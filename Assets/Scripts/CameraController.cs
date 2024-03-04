@@ -109,7 +109,7 @@ public class CameraController : MonoBehaviour
         // Scroll to zoom in and out
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if (scroll != 0) {
-            Vector3 newPosition = transform.position + transform.forward * scroll * 2.0f;
+            Vector3 newPosition = transform.position + transform.forward * scroll * 3.0f;
             if (newPosition.y > lowerBound && newPosition.y < upperBound && IsInBounds(newPosition)) {
                 transform.position = newPosition;
             }
@@ -239,7 +239,7 @@ public class CameraController : MonoBehaviour
     }
 
     private void HandleAcladSelected(GameObject aclad) {
-        if (this.targetAclad != null && this.targetAclad != aclad.transform) {
+        if (this.targetAclad != null && this.targetAclad != aclad.transform && cameraState == CameraState.ThirdPerson) {
             cameraState = CameraState.ThirdToThird;
             elapsedTime = 0.0f;
         }

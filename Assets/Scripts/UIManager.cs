@@ -6,11 +6,10 @@ public class UIManager : MonoBehaviour
 {
 
     private GameObject selectedAclad;
-
     public GameObject acladUp;
     public GameObject acladRight;
-
     public GameObject acladLeft;
+    public GameObject acladLaser;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +37,13 @@ public class UIManager : MonoBehaviour
         if (Input.GetKey(KeyCode.L) && selectedAclad != null) {
             //create an instance of the acladLeft prefab on the same position as the selectedAclad
             Instantiate(acladLeft, selectedAclad.transform.position + new Vector3(0, 0.5f, 0), selectedAclad.transform.rotation * Quaternion.Euler(0f, 180f, 0f));
+            //destroy the selectedAclad
+            Destroy(selectedAclad);
+        }
+
+        if (Input.GetKey(KeyCode.B) && selectedAclad != null) {
+            //create an instance of the acladLaser prefab on the same position as the selectedAclad
+            Instantiate(acladLaser, selectedAclad.transform.position + new Vector3(0, 0.3f, 0), selectedAclad.transform.rotation);
             //destroy the selectedAclad
             Destroy(selectedAclad);
         }
