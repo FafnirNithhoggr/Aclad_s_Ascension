@@ -27,6 +27,7 @@ public class CameraController : MonoBehaviour
         Main,
         MainToThird,
         ThirdPerson,
+        ThirdToThird,
         ThirdToMain,
         GameWonTransition,
         GameWon
@@ -62,6 +63,8 @@ public class CameraController : MonoBehaviour
             HandleMainToThird();
         } else if (cameraState == CameraState.ThirdPerson) {
             HandleThirdPerson();
+        } else if (cameraState == CameraState.ThirdToThird) {
+            HandleThirdToThirdPerson();
         } else if (cameraState == CameraState.ThirdToMain) {
             HandleThirdToMain();
         } else if (cameraState == CameraState.GameWonTransition) {
@@ -169,6 +172,24 @@ public class CameraController : MonoBehaviour
         transform.LookAt(targetAclad);
     }
 
+    private void HandleThirdToThirdPerson() {
+        if (targetAclad == null) {
+            cameraState = CameraState.Main;
+            elapsedTime = 0.0f;
+            return;
+        }
+        elapsedTime += Time.deltaTime;
+        float factor = Mathf.SmoothStep(0, 1, elapsedTime / 2.0f);
+        Vector3 targetPosition = targetAclad.position + offsetToAclad;
+        Quaternion targetRotation = Quaternion.LookRotation(targetAclad.position - targetPosition);
+        transform.position = Vector3.Lerp(transform.position, targetPosition, transitionMoveSpeed * factor);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, transitionRotationSpeed * factor);
+        if (Vector3.Distance(transform.position, targetPosition) < 0.05f && Quaternion.Angle(transform.rotation, targetRotation) < 1.0f) {
+            cameraState = CameraState.ThirdPerson;
+            elapsedTime = 0.0f;
+        }
+    }
+
     private void HandleThirdToMain() {
         elapsedTime += Time.deltaTime;
         float factor = Mathf.SmoothStep(0, 1, elapsedTime / 2.0f);
@@ -200,6 +221,10 @@ public class CameraController : MonoBehaviour
     }
 
     private void HandleAcladSelected(GameObject aclad) {
+        if (this.targetAclad != null && this.targetAclad != aclad.transform) {
+            cameraState = CameraState.ThirdToThird;
+            elapsedTime = 0.0f;
+        }
         this.targetAclad = aclad.transform;
     }
 
