@@ -12,6 +12,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float lowerBound;
     [SerializeField] private float upperBound;
     [SerializeField] private float timeToWait;
+    [SerializeField] private float xBoundary;
+    [SerializeField] private float zBoundary;
     public GameObject Spawner;
     public GameObject Receiver;
     private Vector3 mainCameraPosition;
@@ -97,14 +99,18 @@ public class CameraController : MonoBehaviour
         Vector3 direction = new Vector3(horizontal, 0, vertical);
         // Project the camera forward vector to the xz plane
         Vector3 forward = Vector3.ProjectOnPlane(transform.forward, Vector3.up);
-        transform.position += forward * vertical * moveSpeed * Time.deltaTime;
-        transform.position += transform.right * horizontal * moveSpeed * Time.deltaTime;
+        Vector3 deltaVertical = forward * vertical * moveSpeed * Time.deltaTime;
+        Vector3 deltaHorizontal = transform.right * horizontal * moveSpeed * Time.deltaTime;
+        Vector3 newPositionXY = transform.position + deltaVertical + deltaHorizontal;
+        if (IsInBounds(newPositionXY)) {
+            transform.position = newPositionXY;
+        }
 
         // Scroll to zoom in and out
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if (scroll != 0) {
             Vector3 newPosition = transform.position + transform.forward * scroll * 2.0f;
-            if (newPosition.y > lowerBound && newPosition.y < upperBound) {
+            if (newPosition.y > lowerBound && newPosition.y < upperBound && IsInBounds(newPosition)) {
                 transform.position = newPosition;
             }
         }
@@ -128,6 +134,20 @@ public class CameraController : MonoBehaviour
             mainCameraRotation = transform.rotation;
             mainCameraPosition = transform.position;
             elapsedTime = 0.0f;
+        }
+        // Move the camera up and down using the q and e keys
+        if (Input.GetKey(KeyCode.Q)) {
+            Vector3 targetPosition = transform.position + Vector3.up * moveSpeed * Time.deltaTime;
+            if (targetPosition.y < upperBound) {
+                transform.position = targetPosition;
+            }
+        }
+
+        if (Input.GetKey(KeyCode.E)) {
+            Vector3 targetPosition = transform.position - Vector3.up * moveSpeed * Time.deltaTime;
+            if (targetPosition.y > lowerBound) {
+                transform.position = targetPosition;
+            }
         }
     }
 
@@ -228,5 +248,9 @@ public class CameraController : MonoBehaviour
 
     private void HandleAcladDeselected() {
         this.targetAclad = null;
+    }
+
+    private bool IsInBounds(Vector3 position) {
+        return position.x > -xBoundary && position.x < xBoundary && position.z > -zBoundary && position.z < zBoundary;
     }
 }
