@@ -6,20 +6,13 @@ public class AcladLogic : MonoBehaviour
 {
     public Rigidbody rb;
     public float speed;
-
-    private Vector3 direction;
-    // Start is called before the first frame update
-
-
     public float maxSuspensionLength;
     public float suspensionMultiplier;
     public float dampSenstivity;
     public float maxDamp;
-
     public float timeOffset;
-
     private float oldDist;
-
+    private Vector3 direction;
 
     private void Awake()
     {
@@ -39,9 +32,7 @@ public class AcladLogic : MonoBehaviour
         if(Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity)){
             if(hit.collider != null)
             {
-
                 Vector3 suspensionForce = Mathf.Clamp(maxSuspensionLength - hit.distance, 0, maxSuspensionLength) * suspensionMultiplier * transform.up * Time.deltaTime * timeOffset;
-                Debug.Log(suspensionForce.magnitude);
 
                 suspensionForce += transform.up * Mathf.Clamp((oldDist - hit.distance) * dampSenstivity, 0, maxDamp) * Time.deltaTime * timeOffset;
 
@@ -58,10 +49,9 @@ public class AcladLogic : MonoBehaviour
             }
             oldDist = hit.distance;
         
-        }else{
+        } else {
             transform.position += direction * speed * Time.deltaTime;
         }
-
 
         if (transform.position.y < -10)
         {

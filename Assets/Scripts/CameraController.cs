@@ -223,7 +223,8 @@ public class CameraController : MonoBehaviour
         elapsedTime += Time.deltaTime;
         float factor = Mathf.SmoothStep(0, 1, elapsedTime / 2.0f);
         Vector3 targetPosition = Receiver.transform.position + new Vector3(0, 1, 0);
-        Quaternion targetRotation = Quaternion.Inverse(Receiver.transform.rotation); // The target rotation is the inverse of the receiver rotation
+        // The target rotation is in the direction of the receiver
+        Quaternion targetRotation = Quaternion.LookRotation(-Receiver.transform.forward);
         transform.position = Vector3.Lerp(transform.position, targetPosition, transitionMoveSpeed * factor);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, transitionRotationSpeed * factor);
         if (Vector3.Distance(transform.position, targetPosition) < 0.1f && Quaternion.Angle(transform.rotation, targetRotation) < 1.0f) {
