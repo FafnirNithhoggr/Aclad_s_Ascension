@@ -4,151 +4,189 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public float rotationSpeed;
-    public Vector3 focusPoint;
-    public float lowerBound;
-    public float upperBound;
-    public float transitionSpeed = 5f; // Adjust the transition speed as needed
-    public Vector3 winningPosition;
-    public float winningTransitionSpeed = 5.0f; // Adjust the transition speed as needed
-    public float winningRotationSpeed = 2.0f; // Adjust the rotation speed as needed
-    private Vector3 originalPosition ;
-    private Quaternion originalRotation;
-    private Vector3 originalFocusPoint;
+    [SerializeField] private float rotationSpeed;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float transitionMoveSpeed;
+    [SerializeField] private float transitionRotationSpeed;
+    [SerializeField] private float lowerBound;
+    [SerializeField] private float upperBound;
+    [SerializeField] private float timeToWait;
+    public GameObject Spawner;
+    public GameObject Receiver;
+    private Vector3 mainCameraPosition;
+    private Quaternion mainCameraRotation;
+    private Vector3 mainCameraFocusPoint;
     private Transform targetAclad; // The currently selected Aclad
+    private Vector3 offsetToAclad;
+    private float elapsedTime = 0.0f;
+
     private enum CameraState {
+        Begin,
+        InitialTransition,
         Main,
+        MainToThird,
         ThirdPerson,
-        TransitionToFirst,
+        ThirdToMain,
         GameWonTransition,
         GameWon
     }
 
     private CameraState cameraState;
 
-    private Vector3 XZPlane = new Vector3(1.0f, 0.0f, 1.0f);
+    private void Awake() {
+        // Subscribe to the events
+        SelectionManager.OnAcladSelected += HandleAcladSelected;
+        SelectionManager.OnAcladDeselected += HandleAcladDeselected;
+    }
 
     void Start()
     {
-        // Save the original position and rotation and make sure it is a copy
-        originalPosition = transform.position;
-        originalRotation = transform.rotation;
-        cameraState = CameraState.Main;
+        mainCameraFocusPoint = new Vector3(0, 0, 0);
+        mainCameraPosition = transform.position;
+        mainCameraRotation = transform.rotation;
+        cameraState = CameraState.Begin;
+        transform.position = Spawner.transform.position + new Vector3(-0.5f, 1, 0);
+        transform.rotation = Spawner.transform.rotation;
     }
 
     void Update()
-    {
-        if (cameraState == CameraState.GameWon) {
-            return;
-        }
-
-        if (cameraState == CameraState.GameWonTransition) {
-            // Smooth the transition to the winning position and make the camera look up
-            transform.position = Vector3.Lerp(transform.position, winningPosition, Time.deltaTime * winningTransitionSpeed);
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(Vector3.up), Time.deltaTime * winningRotationSpeed);
-            // Check if the transition is complete
-            if (Vector3.Distance(transform.position, winningPosition) < 0.1f && Quaternion.Angle(transform.rotation, Quaternion.LookRotation(Vector3.up)) < 1.0f) {
-                cameraState = CameraState.GameWon;
-                // Show the winning text mesh pro
-                GameObject.Find("WinCanvas").GetComponent<Canvas>().enabled = true;
-            }
-            
-        }
-
-/*         // Check if any aclad was selected using the mouse
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                if (hit.collider.gameObject.CompareTag("Aclad"))
-                {
-                    // Set the selected Aclad
-                    targetAclad = hit.collider.gameObject.transform;
-                    // Start the camera transition
-                    StartCameraThirdPerson();
-                }
-            }
-        } */
-
-        // If it's esc, then exit the third person view
-        if (Input.GetKey(KeyCode.Escape)) {
-            EndCameraThirdPerson();
-        }
-
-        if (cameraState != CameraState.Main) {return;}
-
-        // Zoom in and out with the mouse wheel
-        float scroll = Input.GetAxis("Mouse ScrollWheel");
-        transform.Translate(0, 0, scroll * 10);
-
-        if (Input.GetKey(KeyCode.A)) {
-            transform.RotateAround(focusPoint, Vector3.up, rotationSpeed * Time.deltaTime);
-        }
-
-        if (Input.GetKey(KeyCode.D)) {
-            transform.RotateAround(focusPoint, Vector3.up, -1 * rotationSpeed * Time.deltaTime);
-        }
-
-        if (Input.GetKey(KeyCode.W) && focusPoint.y < upperBound) {
-            transform.Translate(0, 0.1f, 0);
-            focusPoint.y += 0.1f;
-        }
-
-        if (Input.GetKey(KeyCode.S) && focusPoint.y > lowerBound) {
-            transform.Translate(0, -0.1f, 0);
-            focusPoint.y -= 0.1f;
+    {   // Maybe we can use a switch statement here
+        if (cameraState == CameraState.Begin) {
+            HandleBegin();
+        } else if (cameraState == CameraState.InitialTransition) {
+            HandleInitialTransition();
+        } else if (cameraState == CameraState.Main) {
+            HandleMain();
+        } else if (cameraState == CameraState.MainToThird) {
+            HandleMainToThird();
+        } else if (cameraState == CameraState.ThirdPerson) {
+            HandleThirdPerson();
+        } else if (cameraState == CameraState.ThirdToMain) {
+            HandleThirdToMain();
+        } else if (cameraState == CameraState.GameWonTransition) {
+            HandleGameWonTransition();
         }
 
     }
 
     private void LateUpdate() {
-        // Check if the camera is currently in third person
+        
+    }
 
-        if (cameraState == CameraState.ThirdPerson) {
-            // Check if the target Aclad has not been destroyed
-            if (targetAclad == null) {
-                EndCameraThirdPerson();
-                return;
-            }
-            Vector3 desiredPosition = targetAclad.position - (targetAclad.forward*2) + Vector3.up; // Adjust as needed
-            Quaternion targetRotation = Quaternion.LookRotation(targetAclad.position - transform.position);
-
-            // Smooth the transition
-            transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * transitionSpeed);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * transitionSpeed);
-        } else if (cameraState == CameraState.TransitionToFirst) {
-            // Smooth the transition back to the original position
-            transform.position = Vector3.Lerp(transform.position, originalPosition, Time.deltaTime * transitionSpeed);
-            transform.rotation = Quaternion.Lerp(transform.rotation, originalRotation, Time.deltaTime * transitionSpeed);
-
-            // Check if the transition is complete
-            if (Vector3.Distance(transform.position, originalPosition) < 0.1f && Quaternion.Angle(transform.rotation, originalRotation) < 1.0f) {
-                cameraState = CameraState.Main;
-            }
+    private void HandleBegin() {
+        // Just wait for a few seconds before starting the initial transition
+        if (Time.time > timeToWait) {
+            cameraState = CameraState.InitialTransition;
         }
     }
 
-    void StartCameraThirdPerson()
-    {   
-        // If the camera is already in third person, then it shouldn't overwrite the original position
-        if (cameraState == CameraState.ThirdPerson) {return;}
-        // Save the original
-        originalPosition = transform.position;
-        originalRotation = transform.rotation;
-        originalFocusPoint = focusPoint;
-        cameraState = CameraState.ThirdPerson;
+    private void HandleInitialTransition() {
+        // Make the camera move slow in the beginning, then speed up, and then slow down again
+        elapsedTime += Time.deltaTime;
+        float factor = Mathf.SmoothStep(0, 1, elapsedTime / 2.0f);
+        transform.position = Vector3.Lerp(transform.position, mainCameraPosition, transitionMoveSpeed * factor);
+        transform.rotation = Quaternion.Lerp(transform.rotation, mainCameraRotation, transitionRotationSpeed * factor);
+        if (Vector3.Distance(transform.position, mainCameraPosition) < 0.1f && Quaternion.Angle(transform.rotation, mainCameraRotation) < 1.0f) {
+            cameraState = CameraState.Main;
+            elapsedTime = 0.0f;
+        }
     }
 
-    void EndCameraThirdPerson()
-    {
-        cameraState = CameraState.TransitionToFirst;
-        focusPoint = originalFocusPoint;
+    private void HandleMain() {
+        // Read keys wsad to move the camera in the global xz plane, but in the direction of the camera
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+        Vector3 direction = new Vector3(horizontal, 0, vertical);
+        // Project the camera forward vector to the xz plane
+        Vector3 forward = Vector3.ProjectOnPlane(transform.forward, Vector3.up);
+        transform.position += forward * vertical * moveSpeed * Time.deltaTime;
+        transform.position += transform.right * horizontal * moveSpeed * Time.deltaTime;
+
+        // Scroll to zoom in and out
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        if (scroll != 0) {
+            Vector3 newPosition = transform.position + transform.forward * scroll * 2.0f;
+            if (newPosition.y > lowerBound && newPosition.y < upperBound) {
+                transform.position = newPosition;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.V) && targetAclad != null) {
+            cameraState = CameraState.MainToThird;
+            mainCameraRotation = transform.rotation;
+            mainCameraPosition = transform.position;
+            elapsedTime = 0.0f;
+        }
     }
+
+    private void HandleMainToThird() {
+        elapsedTime += Time.deltaTime;
+        float factor = Mathf.SmoothStep(0, 1, elapsedTime / 2.0f);
+        Vector3 targetPosition = targetAclad.position - targetAclad.forward * 2.0f + Vector3.up * 1.0f;
+        Quaternion targetRotation = Quaternion.LookRotation(targetAclad.position - targetPosition);
+        transform.position = Vector3.Lerp(transform.position, targetPosition, transitionMoveSpeed * factor);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, transitionRotationSpeed * factor);
+        if (Vector3.Distance(transform.position, targetPosition) < 0.05f && Quaternion.Angle(transform.rotation, targetRotation) < 1.0f) {
+            cameraState = CameraState.ThirdPerson;
+            offsetToAclad = transform.position - targetAclad.position;
+            elapsedTime = 0.0f;
+        }
+    }
+
+    private void HandleThirdPerson() {
+        if (Input.GetKeyDown(KeyCode.V) || targetAclad == null) {
+            cameraState = CameraState.ThirdToMain;
+            return;
+        }
+
+        // Read keys wsad to move the camera around the aclad using the offset
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+        Vector3 direction = new Vector3(horizontal, 0, vertical);
+        // Calculate the new offset using the direction and the offsetToAclad
+        offsetToAclad = Quaternion.AngleAxis(-horizontal * rotationSpeed * Time.deltaTime, Vector3.up) * offsetToAclad;
+        offsetToAclad = Quaternion.AngleAxis(vertical * rotationSpeed * Time.deltaTime, transform.right) * offsetToAclad;
+        transform.position = targetAclad.position + offsetToAclad;
+
+        // Make the camera look at the targetAclad
+        transform.LookAt(targetAclad);
+    }
+
+    private void HandleThirdToMain() {
+        elapsedTime += Time.deltaTime;
+        float factor = Mathf.SmoothStep(0, 1, elapsedTime / 2.0f);
+        transform.position = Vector3.Lerp(transform.position, mainCameraPosition, transitionMoveSpeed * factor);
+        transform.rotation = Quaternion.Lerp(transform.rotation, mainCameraRotation, transitionRotationSpeed * factor);
+        if (Vector3.Distance(transform.position, mainCameraPosition) < 0.05f && Quaternion.Angle(transform.rotation, mainCameraRotation) < 1.0f) {
+            cameraState = CameraState.Main;
+            elapsedTime = 0.0f;
+        }
+    }
+
+    private void HandleGameWonTransition() {
+        elapsedTime += Time.deltaTime;
+        float factor = Mathf.SmoothStep(0, 1, elapsedTime / 2.0f);
+        Vector3 targetPosition = Receiver.transform.position + new Vector3(0, 1, 0);
+        Quaternion targetRotation = Quaternion.Inverse(Receiver.transform.rotation); // The target rotation is the inverse of the receiver rotation
+        transform.position = Vector3.Lerp(transform.position, targetPosition, transitionMoveSpeed * factor);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, transitionRotationSpeed * factor);
+        if (Vector3.Distance(transform.position, targetPosition) < 0.05f && Quaternion.Angle(transform.rotation, targetRotation) < 1.0f) {
+            cameraState = CameraState.GameWon;
+            GameObject.Find("WinCanvas").GetComponent<Canvas>().enabled = true;
+            elapsedTime = 0.0f;
+        }
+    }
+    
 
     public void WonGame() {
         cameraState = CameraState.GameWonTransition;
     }
 
+    private void HandleAcladSelected(GameObject aclad) {
+        this.targetAclad = aclad.transform;
+    }
+
+    private void HandleAcladDeselected() {
+        this.targetAclad = null;
+    }
 }

@@ -48,10 +48,6 @@ public class SelectionManager : MonoBehaviour
             HandleAcladDeselected();
         }
 
-
-
-
-
     }
 
     void HandleAcladSelected(GameObject aclad) {
@@ -59,7 +55,6 @@ public class SelectionManager : MonoBehaviour
         this.targetAclad = aclad.transform;
 
         OnAcladSelected?.Invoke(aclad);
-
     }
 
     void HandleAcladDeselected() {
