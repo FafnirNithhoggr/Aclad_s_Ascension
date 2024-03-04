@@ -16,6 +16,8 @@ public class AcladLogic : MonoBehaviour
     public float dampSenstivity;
     public float maxDamp;
 
+    public float timeOffset;
+
     private float oldDist;
 
 
@@ -38,9 +40,10 @@ public class AcladLogic : MonoBehaviour
             if(hit.collider != null)
             {
 
-                Vector3 suspensionForce = Mathf.Clamp(maxSuspensionLength - hit.distance, 0, maxSuspensionLength) * suspensionMultiplier * transform.up;
+                Vector3 suspensionForce = Mathf.Clamp(maxSuspensionLength - hit.distance, 0, maxSuspensionLength) * suspensionMultiplier * transform.up * Time.deltaTime * timeOffset;
+                Debug.Log(suspensionForce.magnitude);
 
-                suspensionForce += transform.up * Mathf.Clamp((oldDist - hit.distance) * dampSenstivity, 0, maxDamp) * Time.deltaTime;
+                suspensionForce += transform.up * Mathf.Clamp((oldDist - hit.distance) * dampSenstivity, 0, maxDamp) * Time.deltaTime * timeOffset;
 
                 rb.AddForce(suspensionForce, ForceMode.Force);
 

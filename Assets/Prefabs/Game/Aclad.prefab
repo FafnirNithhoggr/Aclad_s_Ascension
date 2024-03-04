@@ -121,10 +121,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 8979835717107177485}
   speed: 1.25
-  maxSuspensionLength: 0.5
+  maxSuspensionLength: 1
   suspensionMultiplier: 10
   dampSenstivity: 400
-  maxDamp: 6
+  maxDamp: 10
+  timeOffset: 100
 --- !u!1001 &8309862427316616135
 PrefabInstance:
   m_ObjectHideFlags: 0
