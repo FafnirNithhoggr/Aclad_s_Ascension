@@ -20,6 +20,6 @@ public class LevelSelector : MonoBehaviour
     {
         // Load the game scene
         // SceneManager.LoadScene("Level" + levelNumber.ToString());
-        SceneManager.LoadScene("Level1"); // For now, load the first level
+        SceneManager.LoadScene("Level test"); // For now, load the first level
     }
 }

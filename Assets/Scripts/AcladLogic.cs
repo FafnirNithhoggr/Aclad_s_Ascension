@@ -40,7 +40,7 @@ public class AcladLogic : MonoBehaviour
 
                 Vector3 suspensionForce = Mathf.Clamp(maxSuspensionLength - hit.distance, 0, maxSuspensionLength) * suspensionMultiplier * transform.up;
 
-                suspensionForce += transform.up * Mathf.Clamp((oldDist - hit.distance) * dampSenstivity, 0, maxDamp);
+                suspensionForce += transform.up * Mathf.Clamp((oldDist - hit.distance) * dampSenstivity, 0, maxDamp) * Time.deltaTime;
 
                 rb.AddForce(suspensionForce, ForceMode.Force);
 
@@ -52,12 +52,6 @@ public class AcladLogic : MonoBehaviour
 
                 Debug.DrawRay(transform.position, rb.velocity, Color.green);
 
-                
-        
-            
-            }
-            else
-            {
             }
             oldDist = hit.distance;
         
