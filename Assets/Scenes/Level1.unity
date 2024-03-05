@@ -97,8 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: b7794d37f06afdf488fa16377d9b9fe4, type: 2}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: 09f2c9356063c0c4fad9e358d701517d, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: e1790247c466dfb4fab19666f30ff9d1, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 8b0d4a2b499ade7429c3534e399384dc, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -3305,6 +3305,7 @@ MonoBehaviour:
   acladUp: {fileID: 5523505967202697209, guid: cd072c93ff5b9554d8cc6747eb430624, type: 3}
   acladRight: {fileID: 5449948114487523844, guid: e67d71695dd44e34283d2a6b577249aa, type: 3}
   acladLeft: {fileID: 5449948114487523844, guid: a6f96a94d11e9ae4190ee6b6e8ff46f8, type: 3}
+  acladLaser: {fileID: 0}
 --- !u!4 &2104749495 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6669724936075138253, guid: 9cc0aa25b2825474286ff2183bc84855, type: 3}

@@ -19,7 +19,12 @@ public class LevelSelector : MonoBehaviour
     public void ClickLevel()
     {
         // Load the game scene
-        // SceneManager.LoadScene("Level" + levelNumber.ToString());
-        SceneManager.LoadScene("Level test"); // For now, load the first level
+        if (levelNumber < 4) { // THIS IS JUST TEMPORARY, REMOVE THIS WHEN WE HAVE MORE LEVELS
+            SceneManager.LoadScene("Level" + levelNumber.ToString());
+        } else {
+            SceneManager.LoadScene("Level test"); // For now, load the first level
+        }
+        
+        
     }
 }
