@@ -2165,6 +2165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10615a376e59d5047a6333155a0df09e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentLevel: 1
+  isLastLevel: 0
 --- !u!4 &1493767007 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5850790226654370445, guid: 7e2e4033da2dce24084800fe48341bd8, type: 3}
@@ -3053,7 +3055,15 @@ PrefabInstance:
       objectReference: {fileID: 1470909117}
     - target: {fileID: 2885955470571628903, guid: c8fbefa6bc9325849b75fd4e9f98d246, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3007406053023300321, guid: c8fbefa6bc9325849b75fd4e9f98d246, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1470909117}
+    - target: {fileID: 3007406053023300321, guid: c8fbefa6bc9325849b75fd4e9f98d246, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NextLevel
       objectReference: {fileID: 0}
     - target: {fileID: 7544435248993964699, guid: c8fbefa6bc9325849b75fd4e9f98d246, type: 3}
       propertyPath: m_Pivot.x

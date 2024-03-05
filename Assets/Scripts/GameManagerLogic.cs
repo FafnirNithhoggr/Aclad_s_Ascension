@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class GameManagerLogic : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    public int currentLevel;
+    public bool isLastLevel;
     public void ExitGame() {
         Debug.Log("Exit Game");
         // Load LevelSelection Scene
         UnityEngine.SceneManagement.SceneManager.LoadScene("LevelSelection");
+    }
+
+    public void NextLevel() {
+        if (isLastLevel) {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+            return;
+        }
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Level" + (currentLevel + 1).ToString());
     }
 }
