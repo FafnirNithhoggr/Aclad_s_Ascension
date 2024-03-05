@@ -86,7 +86,7 @@ public class CameraController : MonoBehaviour
         float factor = Mathf.SmoothStep(0, 1, elapsedTime / 2.0f);
         transform.position = Vector3.Lerp(transform.position, mainCameraPosition, transitionMoveSpeed * factor);
         transform.rotation = Quaternion.Lerp(transform.rotation, mainCameraRotation, transitionRotationSpeed * factor);
-        if (Vector3.Distance(transform.position, mainCameraPosition) < 0.1f && Quaternion.Angle(transform.rotation, mainCameraRotation) < 1.0f) {
+        if (Vector3.Distance(transform.position, mainCameraPosition) < 0.05f && Quaternion.Angle(transform.rotation, mainCameraRotation) < 1.0f) {
             cameraState = CameraState.Main;
             elapsedTime = 0.0f;
         }
@@ -163,7 +163,7 @@ public class CameraController : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(targetAclad.position - targetPosition);
         transform.position = Vector3.Lerp(transform.position, targetPosition, transitionMoveSpeed * factor);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, transitionRotationSpeed * factor);
-        if (Vector3.Distance(transform.position, targetPosition) < 0.1f && Quaternion.Angle(transform.rotation, targetRotation) < 1.0f) {
+        if (Vector3.Distance(transform.position, targetPosition) < 0.15f && Quaternion.Angle(transform.rotation, targetRotation) < 1.0f) {
             cameraState = CameraState.ThirdPerson;
             offsetToAclad = transform.position - targetAclad.position;
             elapsedTime = 0.0f;
@@ -202,7 +202,7 @@ public class CameraController : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(targetAclad.position - targetPosition);
         transform.position = Vector3.Lerp(transform.position, targetPosition, transitionMoveSpeed * factor);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, transitionRotationSpeed * factor);
-        if (Vector3.Distance(transform.position, targetPosition) < 0.1f && Quaternion.Angle(transform.rotation, targetRotation) < 1.0f) {
+        if (Vector3.Distance(transform.position, targetPosition) < 0.15f && Quaternion.Angle(transform.rotation, targetRotation) < 1.0f) {
             cameraState = CameraState.ThirdPerson;
             elapsedTime = 0.0f;
         }
@@ -227,7 +227,7 @@ public class CameraController : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(-Receiver.transform.forward);
         transform.position = Vector3.Lerp(transform.position, targetPosition, transitionMoveSpeed * factor);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, transitionRotationSpeed * factor);
-        if (Vector3.Distance(transform.position, targetPosition) < 0.1f && Quaternion.Angle(transform.rotation, targetRotation) < 1.0f) {
+        if (Vector3.Distance(transform.position, targetPosition) < 0.05f && Quaternion.Angle(transform.rotation, targetRotation) < 1.0f) {
             cameraState = CameraState.GameWon;
             GameObject.Find("WinCanvas").GetComponent<Canvas>().enabled = true;
             elapsedTime = 0.0f;
