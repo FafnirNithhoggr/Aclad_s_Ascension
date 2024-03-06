@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 3010532044194712654}
   m_Layer: 0
   m_Name: Spawner
-  m_TagString: Untagged
+  m_TagString: SpawnerLogic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acladPrefab: {fileID: 7101055994744142403, guid: 261be953539922d44820ac5f67584e4c, type: 3}
-  spawnAmount: 20
+  spawnAmount: 10
   spawnTime: 2
 --- !u!1 &7294267488052921076
 GameObject:
@@ -616,8 +616,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7958319100737034318}
   - {fileID: 6895878354784596220}
+  - {fileID: 7958319100737034318}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8944174588785663368

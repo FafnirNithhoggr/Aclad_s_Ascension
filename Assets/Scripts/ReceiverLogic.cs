@@ -23,4 +23,12 @@ public class ReceiverLogic : MonoBehaviour
             }
         }
     }
+
+    public int GetAcladsEntered() {
+        return acladsEntered;
+    }
+
+    public int GetAcladsNeeded() {
+        return acladsNeeded;
+    }
 }

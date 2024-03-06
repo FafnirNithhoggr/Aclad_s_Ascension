@@ -7,6 +7,8 @@ TagManager:
   - Slope
   - Up
   - Aclad
+  - SpawnerLogic
+  - ReceiverLogic
   layers:
   - Default
   - TransparentFX
