@@ -4,11 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Slope
   - Up
   - Aclad
   - SpawnerLogic
   - ReceiverLogic
+  - Terrain
   layers:
   - Default
   - TransparentFX
