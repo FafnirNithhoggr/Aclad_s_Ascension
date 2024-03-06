@@ -267,7 +267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 8569545251307947571}
   laserSpeed: 10
-  maxLength: 20
+  maxLength: 15
   laserOrigin: {fileID: 7898202023402217001}
   explosionPrefab: {fileID: 7267454795887352078, guid: 8c36f9f83c7532b4195b7b7b0f80c143, type: 3}
 --- !u!1001 &2701399679764332595
