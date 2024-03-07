@@ -10,4 +10,10 @@ public class MenuLogic : MonoBehaviour
         // Load the game scene
         SceneManager.LoadScene("LevelSelection");
     }
+
+    public void ClickExit()
+    {
+        // Quit the game
+        Application.Quit();
+    }
 }
