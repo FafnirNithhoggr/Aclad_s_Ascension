@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-
+    public GameObject selectionManager;
     private GameObject selectedAclad;
     public GameObject acladUp;
     public GameObject acladRight;
@@ -28,18 +28,22 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKey(KeyCode.U) && selectedAclad != null) {
+            selectionManager.GetComponent<SelectionManager>().reticle.SetActive(false);
             acladsData.Add(CreateAcladData(selectedAclad, selectedAclad.transform.position, selectedAclad.transform.rotation * Quaternion.Euler(0f, 180f, 0f), 0));
         }
 
         if (Input.GetKey(KeyCode.R) && selectedAclad != null) {
+            selectionManager.GetComponent<SelectionManager>().reticle.SetActive(false);
             acladsData.Add(CreateAcladData(selectedAclad, selectedAclad.transform.position + new Vector3(0, 0.5f, 0), selectedAclad.transform.rotation * Quaternion.Euler(0f, 180f, 0f), 1));
         }
 
         if (Input.GetKey(KeyCode.L) && selectedAclad != null) {
+            selectionManager.GetComponent<SelectionManager>().reticle.SetActive(false);
             acladsData.Add(CreateAcladData(selectedAclad, selectedAclad.transform.position + new Vector3(0, 0.5f, 0), selectedAclad.transform.rotation * Quaternion.Euler(0f, 180f, 0f), 2));
         }
 
         if (Input.GetKey(KeyCode.B) && selectedAclad != null) {
+            selectionManager.GetComponent<SelectionManager>().reticle.SetActive(false);
             acladsData.Add(CreateAcladData(selectedAclad, selectedAclad.transform.position + new Vector3(0, 0.3f, 0), selectedAclad.transform.rotation, 3));
         }
 

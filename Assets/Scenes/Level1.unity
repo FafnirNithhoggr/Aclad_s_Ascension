@@ -3515,6 +3515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b643a4667dca92143bdc2a8dd3160032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectionManager: {fileID: 443612639}
   acladUp: {fileID: 5523505967202697209, guid: cd072c93ff5b9554d8cc6747eb430624, type: 3}
   acladRight: {fileID: 5449948114487523844, guid: e67d71695dd44e34283d2a6b577249aa, type: 3}
   acladLeft: {fileID: 5449948114487523844, guid: a6f96a94d11e9ae4190ee6b6e8ff46f8, type: 3}

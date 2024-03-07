@@ -10,7 +10,6 @@ public class SelectionManager : MonoBehaviour
 
     private Transform targetAclad; // The currently selected Aclad
 
-    
     public static event Action<GameObject> OnAcladSelected;
     public static event Action OnAcladDeselected;
 
