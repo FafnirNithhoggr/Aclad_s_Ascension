@@ -3082,7 +3082,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentLevel: 3
-  isLastLevel: 1
+  isLastLevel: 0
   spawner: {fileID: 1964171576}
   receiver: {fileID: 756167766}
 --- !u!1001 &1495493385
