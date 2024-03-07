@@ -16,6 +16,6 @@ public class FanSpin : MonoBehaviour
     void Update()
     {
         // Rotate the fan blades
-        transform.Rotate(0, 0, spinSpeed * Time.deltaTime);
+        transform.Rotate(-spinSpeed * Time.deltaTime, 0, 0);
     }
 }
