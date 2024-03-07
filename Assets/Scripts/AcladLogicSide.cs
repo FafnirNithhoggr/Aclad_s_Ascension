@@ -26,6 +26,10 @@ public class AcladLogicSide : MonoBehaviour
             }else{
                 acladLogic.SetDirection(transform.right);
             }
+
+
+            otherTransform.position = new Vector3(transform.position.x, otherTransform.position.y, transform.position.z);
         }
     }
+
 }
