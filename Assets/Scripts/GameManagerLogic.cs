@@ -10,6 +10,8 @@ public class GameManagerLogic : MonoBehaviour
     public GameObject receiver = null;
     private float counter = 0.0f;
     private float timeToCheck = 1.0f;
+    private bool isPaused = false;
+    private bool isGameOver = false;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +36,13 @@ public class GameManagerLogic : MonoBehaviour
         }
     }
 
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.P)) {
+            TogglePause();
+            return;
+        }
+    }
+
     // Check once per second if the player has lost the game
     void FixedUpdate() {
         counter += Time.deltaTime;
@@ -51,6 +60,7 @@ public class GameManagerLogic : MonoBehaviour
                 Time.timeScale = 0;
                 // Find the canvas and show the GameOverPanel
                 GameObject.Find("LoseCanvas").GetComponent<Canvas>().enabled = true;
+                isGameOver = true;
             }
         }
     }
@@ -72,5 +82,23 @@ public class GameManagerLogic : MonoBehaviour
     public void RestartLevel() {
         Time.timeScale = 1;
         UnityEngine.SceneManagement.SceneManager.LoadScene("Level" + currentLevel.ToString());
+    }
+
+    public void TogglePause() {
+        if (isGameOver) {
+            return;
+        }
+        if (isPaused) {
+            Debug.Log("Unpausing");
+            Time.timeScale = 1;
+            isPaused = false;
+            GameObject.Find("PauseCanvas").GetComponent<Canvas>().enabled = false;
+
+        } else {
+            Debug.Log("Pausing");
+            Time.timeScale = 0;
+            isPaused = true;
+            GameObject.Find("PauseCanvas").GetComponent<Canvas>().enabled = true;
+        }
     }
 }
