@@ -7,6 +7,8 @@ public class Fan : MonoBehaviour
 
     public float windForce;
 
+    public bool upwards;
+
     private float forceDivisions = 5f;
 
 
@@ -15,6 +17,14 @@ public class Fan : MonoBehaviour
         if (other.gameObject.CompareTag("Aclad")) {
             Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
             //rb.AddForce(transform.forward * windForce, ForceMode.Impulse);
+            rb.AddForce(transform.forward * windForce, ForceMode.Force);
+            Debug.DrawRay(transform.position, transform.forward * windForce, Color.black);
+        }
+    }
+
+    public void OnTriggerStay(Collider other) {
+        if (other.gameObject.CompareTag("Aclad") && upwards) {
+            Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
             rb.AddForce(transform.forward * windForce, ForceMode.Force);
             Debug.DrawRay(transform.position, transform.forward * windForce, Color.black);
         }
