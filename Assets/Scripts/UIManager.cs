@@ -7,9 +7,13 @@ public class UIManager : MonoBehaviour
     public GameObject selectionManager;
     private GameObject selectedAclad;
     public GameObject[] acladsUp;
+    public int acladUpQuantity;
     public GameObject[] acladsRight;
+    public int acladRightQuantity;
     public GameObject[] acladsLeft;
+    public int acladLeftQuantity;
     public GameObject[] acladsLaser;
+    public int acladLaserQuantity;
 
     // Make a struct with the aclad, time and position
     public struct AcladData
@@ -33,22 +37,26 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.U) && selectedAclad != null) {
+        if (Input.GetKey(KeyCode.U) && selectedAclad != null && acladUpQuantity > 0) {
+            acladUpQuantity--;
             selectionManager.GetComponent<SelectionManager>().reticle.SetActive(false);
             acladsData.Add(CreateAcladData(selectedAclad, selectedAclad.transform.position, selectedAclad.transform.rotation * Quaternion.Euler(0f, 180f, 0f), 0));
         }
 
-        if (Input.GetKey(KeyCode.R) && selectedAclad != null) {
+        if (Input.GetKey(KeyCode.R) && selectedAclad != null && acladRightQuantity > 0) {
+            acladRightQuantity--;
             selectionManager.GetComponent<SelectionManager>().reticle.SetActive(false);
             acladsData.Add(CreateAcladData(selectedAclad, selectedAclad.transform.position + new Vector3(0, 0.5f, 0), selectedAclad.transform.rotation * Quaternion.Euler(0f, 180f, 0f), 1));
         }
 
-        if (Input.GetKey(KeyCode.L) && selectedAclad != null) {
+        if (Input.GetKey(KeyCode.L) && selectedAclad != null && acladLeftQuantity > 0) {
+            acladLeftQuantity--;
             selectionManager.GetComponent<SelectionManager>().reticle.SetActive(false);
             acladsData.Add(CreateAcladData(selectedAclad, selectedAclad.transform.position + new Vector3(0, 0.5f, 0), selectedAclad.transform.rotation * Quaternion.Euler(0f, 180f, 0f), 2));
         }
 
-        if (Input.GetKey(KeyCode.B) && selectedAclad != null) {
+        if (Input.GetKey(KeyCode.B) && selectedAclad != null && acladLaserQuantity > 0) {
+            acladLaserQuantity--;
             selectionManager.GetComponent<SelectionManager>().reticle.SetActive(false);
             acladsData.Add(CreateAcladData(selectedAclad, selectedAclad.transform.position + new Vector3(0, 0.3f, 0), selectedAclad.transform.rotation, 3));
         }
