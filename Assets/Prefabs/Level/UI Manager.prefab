@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1894103379513749900
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1128200849046593938}
+  - component: {fileID: 687433278494659712}
+  m_Layer: 0
+  m_Name: UI Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1128200849046593938
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1894103379513749900}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &687433278494659712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1894103379513749900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b643a4667dca92143bdc2a8dd3160032, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectionManager: {fileID: 0}
+  acladsUp:
+  - {fileID: 5523505967202697209, guid: cd072c93ff5b9554d8cc6747eb430624, type: 3}
+  - {fileID: 5523505967202697209, guid: 7245b19e932c02143be1ff40bc3e3e7b, type: 3}
+  - {fileID: 5523505967202697209, guid: 30fd821136162134eb661e122b04ca63, type: 3}
+  acladsRight:
+  - {fileID: 5449948114487523844, guid: e67d71695dd44e34283d2a6b577249aa, type: 3}
+  - {fileID: 5449948114487523844, guid: 633a519b5f92a1546a0b9ad1b08438d0, type: 3}
+  - {fileID: 5449948114487523844, guid: 669cb87f8c7944c4cb34c64a1b521aa0, type: 3}
+  acladsLeft:
+  - {fileID: 5449948114487523844, guid: a6f96a94d11e9ae4190ee6b6e8ff46f8, type: 3}
+  - {fileID: 5449948114487523844, guid: e38fe25ee01f902459228e074dfd1dd7, type: 3}
+  - {fileID: 5449948114487523844, guid: e7120f3e417865b4e8805d9c1249c0e0, type: 3}
+  acladsLaser:
+  - {fileID: 5523505967202697209, guid: 5b54c2e070cdb094480452a1a8c2a7a4, type: 3}
+  - {fileID: 5523505967202697209, guid: 05e2033af8f545049b4583e0c2829f66, type: 3}
+  - {fileID: 5523505967202697209, guid: bc065d55c444e1e4cbf118aa8d83db45, type: 3}

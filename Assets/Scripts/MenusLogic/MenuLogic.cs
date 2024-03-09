@@ -8,7 +8,7 @@ public class MenuLogic : MonoBehaviour
     public void ClickPlay()
     {
         // Load the game scene
-        SceneManager.LoadScene("LevelSelection");
+        SceneManager.LoadScene("AcladSelection");
     }
 
     public void ClickExit()

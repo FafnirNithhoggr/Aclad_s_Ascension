@@ -6,10 +6,10 @@ public class UIManager : MonoBehaviour
 {
     public GameObject selectionManager;
     private GameObject selectedAclad;
-    public GameObject acladUp;
-    public GameObject acladRight;
-    public GameObject acladLeft;
-    public GameObject acladLaser;
+    public GameObject[] acladsUp;
+    public GameObject[] acladsRight;
+    public GameObject[] acladsLeft;
+    public GameObject[] acladsLaser;
 
     // Make a struct with the aclad, time and position
     public struct AcladData
@@ -23,6 +23,12 @@ public class UIManager : MonoBehaviour
         public int acladType;
     }
     private List<AcladData> acladsData = new List<AcladData>();
+
+    void Start()
+    {
+        int selectedAcladModel = PlayerPrefs.GetInt("SelectedAclad", 0);
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -60,16 +66,20 @@ public class UIManager : MonoBehaviour
             if (acladData.timeCount > 1.0f) {
                 if (acladData.acladType == 0) {
                     //create an instance of the acladUp prefab on the same position as the selectedAclad
-                    Instantiate(acladUp, acladData.finalPosition, acladData.finalRotation);
+                    int selectedAcladModel = PlayerPrefs.GetInt("SelectedAclad", 0);
+                    Instantiate(acladsUp[selectedAcladModel], acladData.finalPosition, acladData.finalRotation);
                 } else if (acladData.acladType == 1) {
                     //create an instance of the acladRight prefab on the same position as the selectedAclad
-                    Instantiate(acladRight, acladData.finalPosition, acladData.finalRotation);
+                    int selectedAcladModel = PlayerPrefs.GetInt("SelectedAclad", 0);
+                    Instantiate(acladsRight[selectedAcladModel], acladData.finalPosition, acladData.finalRotation);
                 } else if (acladData.acladType == 2) {
                     //create an instance of the acladLeft prefab on the same position as the selectedAclad
-                    Instantiate(acladLeft, acladData.finalPosition, acladData.finalRotation);
+                    int selectedAcladModel = PlayerPrefs.GetInt("SelectedAclad", 0);
+                    Instantiate(acladsLeft[selectedAcladModel], acladData.finalPosition, acladData.finalRotation);
                 } else if (acladData.acladType == 3) {
                     //create an instance of the acladLaser prefab on the same position as the selectedAclad
-                    Instantiate(acladLaser, acladData.finalPosition, acladData.finalRotation);
+                    int selectedAcladModel = PlayerPrefs.GetInt("SelectedAclad", 0);
+                    Instantiate(acladsLaser[selectedAcladModel], acladData.finalPosition, acladData.finalRotation);
                 }
                 //destroy the selectedAclad
                 Destroy(acladData.aclad);

@@ -359,7 +359,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b3c035751702544a9bd418d716907d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acladPrefab: {fileID: 7101055994744142403, guid: 261be953539922d44820ac5f67584e4c, type: 3}
+  acladPrefabs:
+  - {fileID: 7101055994744142403, guid: 261be953539922d44820ac5f67584e4c, type: 3}
+  - {fileID: 7101055994744142403, guid: ddb89a354af0ff0478c6fc8e9e6c0411, type: 3}
+  - {fileID: 7101055994744142403, guid: 566b35a3e2b70694dbab6bdc6b75d2e0, type: 3}
   spawnAmount: 10
   spawnTime: 2
 --- !u!1 &7294267488052921076

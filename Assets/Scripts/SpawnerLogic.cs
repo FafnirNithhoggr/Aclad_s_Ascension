@@ -5,7 +5,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
 
-    public GameObject acladPrefab;
+    public GameObject[] acladPrefabs;
 
     public int spawnAmount = 5; // 5 aclads to spawn
     private int spawned = 0;
@@ -37,7 +37,8 @@ public class Spawner : MonoBehaviour
 
     void SpawnAclad()
     {
-        GameObject aclad = Instantiate(acladPrefab, transform.position, transform.rotation);
+        int selectedAclad = PlayerPrefs.GetInt("SelectedAclad", 0);
+        GameObject aclad = Instantiate(acladPrefabs[selectedAclad], transform.position, transform.rotation);
         //aclad.GetComponent<AcladLogic>().SetDirection(transform.forward);
     }
 
