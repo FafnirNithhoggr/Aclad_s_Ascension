@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManagerLogic : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class GameManagerLogic : MonoBehaviour
     private float timeToCheck = 1.0f;
     private bool isPaused = false;
     private bool isGameOver = false;
+
+    public TMP_Text currentAcladsText;
+    public TMP_Text acladsNeededText;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +38,9 @@ public class GameManagerLogic : MonoBehaviour
                 break;
             }
         }
+
+        currentAcladsText.text = "0";
+        acladsNeededText.text = receiver.GetComponent<ReceiverLogic>().GetAcladsNeeded().ToString();
     }
 
     private void Update() {
@@ -62,6 +69,8 @@ public class GameManagerLogic : MonoBehaviour
                 GameObject.Find("LoseCanvas").GetComponent<Canvas>().enabled = true;
                 isGameOver = true;
             }
+
+            currentAcladsText.text = nAclads.ToString();
         }
     }
 

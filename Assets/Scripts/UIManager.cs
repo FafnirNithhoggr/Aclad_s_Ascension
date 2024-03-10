@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+
 
 public class UIManager : MonoBehaviour
 {
@@ -8,12 +10,17 @@ public class UIManager : MonoBehaviour
     private GameObject selectedAclad;
     public GameObject[] acladsUp;
     public int acladUpQuantity;
+    public TMP_Text acladUpQuantityText;
     public GameObject[] acladsRight;
     public int acladRightQuantity;
+    public TMP_Text acladRightQuantityText;
     public GameObject[] acladsLeft;
     public int acladLeftQuantity;
+    public TMP_Text acladLeftQuantityText;
     public GameObject[] acladsLaser;
     public int acladLaserQuantity;
+    public TMP_Text acladLaserQuantityText;
+
 
     // Make a struct with the aclad, time and position
     public struct AcladData
@@ -31,6 +38,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         int selectedAcladModel = PlayerPrefs.GetInt("SelectedAclad", 0);
+        UpdateAcladQuantity();
     }
 
 
@@ -38,25 +46,21 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKey(KeyCode.U) && selectedAclad != null && acladUpQuantity > 0) {
-            acladUpQuantity--;
             selectionManager.GetComponent<SelectionManager>().reticle.SetActive(false);
             acladsData.Add(CreateAcladData(selectedAclad, selectedAclad.transform.position, selectedAclad.transform.rotation * Quaternion.Euler(0f, 180f, 0f), 0));
         }
 
         if (Input.GetKey(KeyCode.R) && selectedAclad != null && acladRightQuantity > 0) {
-            acladRightQuantity--;
             selectionManager.GetComponent<SelectionManager>().reticle.SetActive(false);
             acladsData.Add(CreateAcladData(selectedAclad, selectedAclad.transform.position + new Vector3(0, 0.5f, 0), selectedAclad.transform.rotation * Quaternion.Euler(0f, 180f, 0f), 1));
         }
 
         if (Input.GetKey(KeyCode.L) && selectedAclad != null && acladLeftQuantity > 0) {
-            acladLeftQuantity--;
             selectionManager.GetComponent<SelectionManager>().reticle.SetActive(false);
             acladsData.Add(CreateAcladData(selectedAclad, selectedAclad.transform.position + new Vector3(0, 0.5f, 0), selectedAclad.transform.rotation * Quaternion.Euler(0f, 180f, 0f), 2));
         }
 
         if (Input.GetKey(KeyCode.B) && selectedAclad != null && acladLaserQuantity > 0) {
-            acladLaserQuantity--;
             selectionManager.GetComponent<SelectionManager>().reticle.SetActive(false);
             acladsData.Add(CreateAcladData(selectedAclad, selectedAclad.transform.position + new Vector3(0, 0.3f, 0), selectedAclad.transform.rotation, 3));
         }
@@ -73,18 +77,26 @@ public class UIManager : MonoBehaviour
             acladData.aclad.transform.rotation = Quaternion.Slerp(acladData.initialRotation, acladData.finalRotation, acladData.timeCount);
             if (acladData.timeCount > 1.0f) {
                 if (acladData.acladType == 0) {
+                    acladUpQuantity--;
+                    UpdateAcladQuantity();
                     //create an instance of the acladUp prefab on the same position as the selectedAclad
                     int selectedAcladModel = PlayerPrefs.GetInt("SelectedAclad", 0);
                     Instantiate(acladsUp[selectedAcladModel], acladData.finalPosition, acladData.finalRotation);
                 } else if (acladData.acladType == 1) {
+                    acladRightQuantity--;
+                    UpdateAcladQuantity();
                     //create an instance of the acladRight prefab on the same position as the selectedAclad
                     int selectedAcladModel = PlayerPrefs.GetInt("SelectedAclad", 0);
                     Instantiate(acladsRight[selectedAcladModel], acladData.finalPosition, acladData.finalRotation);
                 } else if (acladData.acladType == 2) {
+                    acladLeftQuantity--;
+                    UpdateAcladQuantity();
                     //create an instance of the acladLeft prefab on the same position as the selectedAclad
                     int selectedAcladModel = PlayerPrefs.GetInt("SelectedAclad", 0);
                     Instantiate(acladsLeft[selectedAcladModel], acladData.finalPosition, acladData.finalRotation);
                 } else if (acladData.acladType == 3) {
+                    acladLaserQuantity--;
+                    UpdateAcladQuantity();
                     //create an instance of the acladLaser prefab on the same position as the selectedAclad
                     int selectedAcladModel = PlayerPrefs.GetInt("SelectedAclad", 0);
                     Instantiate(acladsLaser[selectedAcladModel], acladData.finalPosition, acladData.finalRotation);
@@ -133,5 +145,13 @@ public class UIManager : MonoBehaviour
     void HandleAcladDeselected()
     {
         this.selectedAclad = null;
+    }
+
+    void UpdateAcladQuantity()
+    {
+        acladUpQuantityText.text = acladUpQuantity.ToString();
+        acladRightQuantityText.text = acladRightQuantity.ToString();
+        acladLeftQuantityText.text = acladLeftQuantity.ToString();
+        acladLaserQuantityText.text = acladLaserQuantity.ToString();
     }
 }
