@@ -15,7 +15,7 @@ Material:
   - _ALPHATEST_ON
   - _EMISSION
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2450
@@ -82,5 +82,5 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 2, g: 0.16037738, b: 0.16037738, a: 1}
+    - _EmissionColor: {r: 3.8289042, g: 0.48764348, b: 0.48764348, a: 1}
   m_BuildTextureStacks: []
