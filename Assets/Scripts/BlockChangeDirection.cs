@@ -16,7 +16,7 @@ public class BlockChangeDirection : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other) {
+    private void OnCollisionEnter(Collision other) {
         if (other.gameObject.CompareTag("Aclad")) {
             AcladLogic acladLogic = other.gameObject.GetComponent<AcladLogic>();
             Vector3 direction = acladLogic.GetDirection();
@@ -28,4 +28,6 @@ public class BlockChangeDirection : MonoBehaviour
             other.gameObject.transform.Rotate(0, 180, 0);
         }
     }
+
+
 }
