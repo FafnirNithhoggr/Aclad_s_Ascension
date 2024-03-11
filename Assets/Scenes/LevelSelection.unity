@@ -397,6 +397,10 @@ PrefabInstance:
       value: PlayLevelButton (3)
       objectReference: {fileID: 0}
     - target: {fileID: 3688117791418091787, guid: caca60c863881ca4fb5a0de00f442660, type: 3}
+      propertyPath: isLastLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3688117791418091787, guid: caca60c863881ca4fb5a0de00f442660, type: 3}
       propertyPath: levelNumber
       value: 4
       objectReference: {fileID: 0}
