@@ -21,10 +21,6 @@ public class LevelSelector : MonoBehaviour
     public void ClickLevel()
     {
         // Load the game scene
-        if (levelNumber < 5) { // THIS IS JUST TEMPORARY, REMOVE THIS WHEN WE HAVE MORE LEVELS
-            SceneManager.LoadScene("Level" + levelNumber.ToString());
-        } else {
-            SceneManager.LoadScene("Level3");
-        }
+        SceneManager.LoadScene("Level" + levelNumber.ToString());
     }
 }
