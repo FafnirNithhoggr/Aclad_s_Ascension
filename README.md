@@ -5,7 +5,9 @@
 - Use their programs to get through the path
 - Once the required Aclads reach their destination, the level is completed
 
-You can see the video [here](https://www.youtube.com/watch?v=ngaKD6iXTqk)
+You can see the video [here](https://www.youtube.com/watch?v=ngaKD6iXTqk).
+
+And if you want to play the game you can download it [here](https://johnny-droid.itch.io/aclads-ascension) in itch.io.
 
 ![](imgs/img1.png)
 ![](imgs/img2.png)
